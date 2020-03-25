@@ -1,16 +1,14 @@
 #part_scanner_cam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   .webcam-wrapper {
+    display: block;
       width: 100%;
       video {
-          width: 50%;
-          height: auto;
-
-          @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-            width: 70%;
-          }
-          @media only screen and (max-device-width: 768px) {
-            width: 100%;
-          }
+          width: 100%;
+          height: 100%;
           object-fit: cover;
       }
   }

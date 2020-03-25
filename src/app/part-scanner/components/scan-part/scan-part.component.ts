@@ -22,6 +22,7 @@ export class ScanPartComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
+    this.showCameraView = false;
     this.outlineImageList = [
       { image: 'Engine outline 1', src: '../../assets/images/engines-outlines/utc-engine-outline.png' },
       { image: 'Some Other', src: 'https://via.placeholder.com/300.png/09f/fff' }

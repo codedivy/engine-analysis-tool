@@ -8,6 +8,29 @@
     display: flex;
     justify-content: flex-end;
   }
+  .not-focusable:focus {
+    outline: none;
+    box-shadow: none;
+}   
+
+
+.btn.btn-default {
+  background-color: black;
+  margin-left: 10px;
+  color:white;
+  /*justify-content: flex-start;*/
+}
+.btn {
+  border-radius: 0;   
+}
+.btn.btn-outline-dark:hover {
+  background-color: white;
+  color:#343a40;
+      
+      /*display: flex;
+      justify-content: flex-start;*/
+
+}
 
   .snapshot {
     margin-top: 10px;
