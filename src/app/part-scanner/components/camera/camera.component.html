@@ -1,8 +1,8 @@
 <div class="camera-container">
   <div style="text-align:center">
     <div>
-      <div class="webcam-cont">
-        <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+      <div class="webcam-cont" #webcamContainer>
+        <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)" [height]="dynamicHeight" [width]="dynamicWidth" *ngIf="showWebcam"
                 id="part_scanner_cam"
                 [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
                 (initError)="handleInitError($event)"></webcam>

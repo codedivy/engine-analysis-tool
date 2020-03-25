@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, Input, EventEmitter, OnChanges} from '@angular/core';
+import {Component, OnInit, Output, Input, EventEmitter, OnChanges, ElementRef, ViewChild, HostListener} from '@angular/core';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';
 import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
@@ -10,8 +10,19 @@ import {WebcamImage, WebcamInitError, WebcamUtil} from 'ngx-webcam';
 })
 export class CameraComponent implements OnInit, OnChanges {
   @Input() imageSrc;
-  @Output()
-  public pictureTaken = new EventEmitter<WebcamImage>();
+  @Output() public pictureTaken = new EventEmitter<WebcamImage>();
+
+  public dynamicWidth;
+  public dynamicHeight;
+  @ViewChild('webcamContainer', {static: true})
+  webcamContainer: ElementRef;
+  @HostListener('window:resize', ['$event'])
+  @HostListener('window:load', ['$event'])
+  onResize(event) {
+    this.dynamicWidth = this.webcamContainer.nativeElement.offsetWidth;
+    this.dynamicHeight = this.webcamContainer.nativeElement.offsetHeight;
+  }
+
 
   // toggle webcam on/off
   public showWebcam = true;
@@ -37,6 +48,8 @@ export class CameraComponent implements OnInit, OnChanges {
       .then((mediaDevices: MediaDeviceInfo[]) => {
         this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
       });
+    this.dynamicWidth = this.webcamContainer.nativeElement.offsetWidth;
+    this.dynamicHeight = this.webcamContainer.nativeElement.offsetHeight;
   }
 
   public triggerSnapshot(): void {
