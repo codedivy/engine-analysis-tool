@@ -7,7 +7,12 @@
     <div class="overlay-img" *ngIf="imageSrc">
       <img [src]="imageSrc">
     </div>
+    <div class="last-click"  *ngIf="lastClickedPicture">
+      <img [src]="lastClickedPicture.imageAsDataUrl"/>
+    </div>
+
   </div>
+
 
   <h4 *ngIf="errors.length > 0">Messages:</h4>
   <ul *ngFor="let error of errors">

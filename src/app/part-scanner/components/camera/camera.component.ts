@@ -29,11 +29,9 @@ export class CameraComponent implements OnInit, OnChanges {
   public allowCameraSwitch = true;
   public multipleWebcamsAvailable = false;
   public deviceId: string;
-  public videoOptions: MediaTrackConstraints = {
-    // width: {ideal: 1024},
-    // height: {ideal: 576}
-  };
+  public videoOptions: MediaTrackConstraints = {};
   public errors: WebcamInitError[] = [];
+  public lastClickedPicture;
 
   // webcam snapshot trigger
   private trigger: Subject<void> = new Subject<void>();
@@ -73,6 +71,8 @@ export class CameraComponent implements OnInit, OnChanges {
 
   public handleImage(webcamImage: WebcamImage): void {
     console.info('received webcam image', webcamImage);
+    this.lastClickedPicture = webcamImage;
+    setTimeout(() => this.lastClickedPicture = null, 200);
     this.pictureTaken.emit(webcamImage);
   }
 
