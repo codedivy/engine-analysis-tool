@@ -6,24 +6,37 @@
   </div>
   <hr />
 
-  <div class="floating-container">
-    <div class="search">
-      <mat-form-field>
-        <mat-label>Select Outline</mat-label>
-        <mat-select [(value)]="selectedOutlineImage" name="outlineImg">
-          <mat-option>All</mat-option>
-          <mat-option *ngFor="let outlineImage of outlineImageList" [value]="outlineImage.src">
-            {{outlineImage.image}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+  <div class="floating-container {{showCameraView ? ' camera-opened' : ''}}">
+    <div class="actions">
+      <div class="search" *ngIf="showCameraView">
+        <mat-form-field>
+          <mat-label>Select Outline</mat-label>
+          <mat-select [(value)]="selectedOutlineImage" name="outlineImg">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let outlineImage of outlineImageList" [value]="outlineImage.src">
+              {{outlineImage.image}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button name="toggle FullScreen" class="btn btn-default toggle-fullscreen" (click)='toggleFullScreen()' type="button">
+        <img [src]="!fullScreenView ? '../../assets/images/fullscreen-enter.svg' : '../../assets/images/fullscreen-exit.svg'">
+      </button>
+
+      <button type="button" class="btn btn-default trigger-snapshot not-focusable" (click)="triggerSnapshot();" *ngIf="showCameraView">
+        Capture Image
+        <img src="../../assets/images/click-photo.svg">
+      </button>
+
+      <button type="button" class="btn btn-default toggle-camera not-focusable" (click)='toggleCamera()' >
+        {{showCameraView ? 'Close' : 'Open'}} Camera
+        <img src="../../assets/images/cross.svg">
+      </button>
+
     </div>
 
-    <button type="button" class="btn btn-default not-focusable" (click)='toggleCamera()' >
-      {{showCameraView ? 'Close' : 'Open'}} Camera
-    </button>
-
-    <app-camera *ngIf='showCameraView' [imageSrc]='selectedOutlineImage' (pictureTaken)="handleImage($event)"></app-camera>
+    <app-camera *ngIf='showCameraView' #camera [imageSrc]='selectedOutlineImage' [captureImageEvent]="" (pictureTaken)="handleImage($event)"></app-camera>
   </div>
 
 
