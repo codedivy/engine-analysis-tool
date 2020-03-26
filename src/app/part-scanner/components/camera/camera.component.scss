@@ -34,6 +34,20 @@
       width: 100%;
       padding-bottom: 75%;
     }
+
+    @media screen and (orientation:landscape) {
+      margin: initial;
+      width: calc(100vh * 4 / 3);
+      padding-bottom: 100vh;
+
+      + button {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+      }
+    }
+
   }
 
   .snapshot {
@@ -56,6 +70,13 @@
   .not-focusable:focus {
     outline: none;
     box-shadow: none;
+  }
+
+  @media screen and (orientation:landscape) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 
 }
