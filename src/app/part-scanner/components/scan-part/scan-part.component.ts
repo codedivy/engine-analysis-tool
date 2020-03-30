@@ -1,7 +1,8 @@
 import {Component, OnInit, OnChanges, ViewChild, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {WebcamImage} from 'ngx-webcam';
-import {CameraComponent} from "../camera/camera.component";
+import {CameraComponent} from '../camera/camera.component';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-scan-part',
@@ -11,17 +12,22 @@ import {CameraComponent} from "../camera/camera.component";
 export class ScanPartComponent implements OnInit {
 
   @ViewChild('camera', {static: false}) camera: CameraComponent;
-  public webcamImages: any = [];
   public selectedOutlineImage;
   public outlineImageList;
-  public webcamImage: WebcamImage = null;
+  public webcamImage;
+  uploadImageForm: FormGroup;
   selected = 'option2';
 
   showCameraView: boolean;
   fullScreenView: boolean;
 
-  handleImage(webcamImage: WebcamImage) {
-    this.webcamImage = webcamImage;
+  async handleImage(webcamImage: WebcamImage) {
+    this.convertSrcToBlob(webcamImage.imageAsDataUrl)
+    .then(blob => {
+      const blobImage = blob;
+      console.log('blob', blobImage)
+      this.webcamImage = ({blob: blobImage, original: webcamImage});
+    });
   }
 
   constructor(@Inject(DOCUMENT) private document: any) {
@@ -33,6 +39,38 @@ export class ScanPartComponent implements OnInit {
       {image: 'Engine outline 1', src: '../../assets/images/engines-outlines/utc-engine-outline.png'},
       {image: 'Some Other', src: 'https://via.placeholder.com/300.png/09f/fff'}
     ];
+  }
+
+  private convertSrcToBlob(url) {
+    return fetch(url).then(res => res.blob());
+  }
+
+  onSubmit() {
+    if (true ) {
+        const formData = new FormData();
+        console.log('webcam', this.webcamImage);
+        if (this.webcamImage) {
+          // formData.append('file', this.webcamImage.blob);
+        }
+
+        // to see the structure of the formdata
+        formData.forEach((value, key) => {
+            console.log(key, ': ', value);
+        });
+
+        // this.apiService.register(formData)
+        // .subscribe(
+        //     response => {
+        //         this.successToaster(response.msg);
+        //         this.activeModal.close();
+        //         console.log(response);
+        //     }
+        // );
+    }
+  }
+
+  onClick() {
+    console.log('webcam', this.webcamImage);
   }
 
   toggleCamera() {

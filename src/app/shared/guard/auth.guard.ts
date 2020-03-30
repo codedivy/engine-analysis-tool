@@ -30,9 +30,9 @@ export class AuthGuard implements CanActivate {
         }
     }
 
-    logIn(token) {
+    logIn(loginRes) {
         console.log('auth login')
-        localStorage.setItem('token', token);
+        localStorage.setItem('token', loginRes.token);
         // const tokenDetails = this.extractUserDetailsFromToken(loginDetails.token);
         // const roles = [ Object.keys(AUTH_LEVELS)[Object.values(AUTH_LEVELS).indexOf(loginDetails.level)] ];
         // localStorage.setItem('userRoles', JSON.stringify(roles));
