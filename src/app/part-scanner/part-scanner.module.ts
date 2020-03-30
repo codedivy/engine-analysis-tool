@@ -12,6 +12,7 @@ import { CameraComponent } from './components/camera/camera.component';
 import { MaterialModule } from './common/material/material.module';
 
 import { WebcamModule } from 'ngx-webcam';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { WebcamModule } from 'ngx-webcam';
     NgbModule,
     PartScannerRoutingModule,
     WebcamModule,
-    MaterialModule
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,

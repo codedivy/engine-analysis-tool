@@ -2,7 +2,7 @@ import {Component, OnInit, OnChanges, ViewChild, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {WebcamImage} from 'ngx-webcam';
 import {CameraComponent} from '../camera/camera.component';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-scan-part',
@@ -15,7 +15,6 @@ export class ScanPartComponent implements OnInit {
   public selectedOutlineImage;
   public outlineImageList;
   public webcamImage;
-  uploadImageForm: FormGroup;
   selected = 'option2';
 
   showCameraView: boolean;
@@ -25,7 +24,7 @@ export class ScanPartComponent implements OnInit {
     this.convertSrcToBlob(webcamImage.imageAsDataUrl)
     .then(blob => {
       const blobImage = blob;
-      console.log('blob', blobImage)
+      console.log('blob', blobImage);
       this.webcamImage = ({blob: blobImage, original: webcamImage});
     });
   }
@@ -45,12 +44,12 @@ export class ScanPartComponent implements OnInit {
     return fetch(url).then(res => res.blob());
   }
 
-  onSubmit() {
+  onUpload() {
     if (true ) {
         const formData = new FormData();
         console.log('webcam', this.webcamImage);
         if (this.webcamImage) {
-          // formData.append('file', this.webcamImage.blob);
+          formData.append('file', this.webcamImage.blob);
         }
 
         // to see the structure of the formdata
