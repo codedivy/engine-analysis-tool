@@ -9,16 +9,26 @@ import { AuthGuard } from 'src/app/shared';
 })
 export class RestClient {
 
+    private headers: object;
+
     constructor(private http: HttpClient, private auth: AuthGuard) {
+      this.headers = {};
     }
 
     private getHttpOptions() {
         return {
             headers: new HttpHeaders({
-            //   'Content-Type':  'application/json',
-              'Authorization': localStorage.getItem('token')
+              ...{
+                //   'Content-Type':  'application/json',
+                'Authorization': localStorage.getItem('token')
+              },
+              ...this.headers
             })
         };
+    }
+
+    public setCustomHeaders(customHeaders) {
+      this.headers = customHeaders;
     }
 
     get(url: string, payload: Object = null, token = null): Observable<any> {
@@ -43,8 +53,20 @@ export class RestClient {
         });
     }
 
-    post(url: string, payload: object = {}) {
-        console.log('rest login')
-        return this.http.post(url, payload);
+    post(url: string, payload: Object = null, token = null): Observable<any> {
+      return Observable.create((observer: Observer<any>) => {
+        return this.http.post(url, payload, this.getHttpOptions()).subscribe(response => {
+          if ( this.auth.handleSession(response as any) ) {
+            this.auth.logOut();
+          } else {
+            observer.next(response);
+          }
+        });
+      });
     }
+
+    postWithoutToken(url: string, payload: object = {}) {
+        return this.http.post(url, payload, this.getHttpOptions());
+    }
+
 }

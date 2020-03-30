@@ -3,6 +3,7 @@ import {DOCUMENT} from '@angular/common';
 import {WebcamImage} from 'ngx-webcam';
 import {CameraComponent} from '../camera/camera.component';
 import { FormGroup, FormControl } from '@angular/forms';
+import {ApiService} from "../../services/api.service";
 
 @Component({
   selector: 'app-scan-part',
@@ -29,7 +30,7 @@ export class ScanPartComponent implements OnInit {
     });
   }
 
-  constructor(@Inject(DOCUMENT) private document: any) {
+  constructor(@Inject(DOCUMENT) private document: any, private apiService: ApiService) {
   }
 
   ngOnInit() {
@@ -57,14 +58,12 @@ export class ScanPartComponent implements OnInit {
             console.log(key, ': ', value);
         });
 
-        // this.apiService.register(formData)
-        // .subscribe(
-        //     response => {
-        //         this.successToaster(response.msg);
-        //         this.activeModal.close();
-        //         console.log(response);
-        //     }
-        // );
+        this.apiService.uploadImage(formData)
+        .subscribe(
+            response => {
+                console.log(response);
+            }
+        );
     }
   }
 
