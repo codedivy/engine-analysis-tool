@@ -66,7 +66,7 @@ export class RestClient {
     }
 
     postWithoutToken(url: string, payload: object = {}) {
-        return this.http.post(url, payload, this.getHttpOptions());
+        return this.http.post(url, payload);
     }
 
 }

@@ -10,7 +10,7 @@ import { SignupPayload } from 'src/app/signup/models/request/signup-payload';
 })
 export class ApiService {
 
-  constructor(private http: RestClient, private httpWithCustomHeaders: RestClient) { }
+  constructor(private http: RestClient) { }
 
 
   login(obj): Observable <any> {
@@ -26,7 +26,7 @@ export class ApiService {
 
   uploadImage(obj): Observable <any> {
     console.log('api upload image');
-    this.httpWithCustomHeaders.setCustomHeaders({'Content-Type':  'multipart/form-data'});
-    return this.httpWithCustomHeaders.post(config.UPLOAD_IMAGE, obj);
+    // this.httpWithCustomHeaders.setCustomHeaders({'Content-Type':  'multipart/form-data'});
+    return this.http.post(config.UPLOAD_IMAGE, obj);
   }
 }
