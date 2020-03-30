@@ -41,6 +41,11 @@ export class AuthGuard implements CanActivate {
         }
     }
 
+
+    signUp() {
+        this.router.navigateByUrl('/login');
+    }
+
     // private extractUserDetailsFromToken(token) {
     //     return window.atob(token.split('.')[1]);
     // }
