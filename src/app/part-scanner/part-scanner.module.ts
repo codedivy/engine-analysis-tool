@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PartScannerRoutingModule } from './part-scanner-routing.module';
 import { PartScannerComponent } from './part-scanner.component';
@@ -12,7 +12,13 @@ import { CameraComponent } from './components/camera/camera.component';
 import { MaterialModule } from './common/material/material.module';
 
 import { WebcamModule } from 'ngx-webcam';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewLeaseComponent } from './components/new-lease/new-lease.component';
+import { LeaseListComponent } from './components/lease-list/lease-list.component';
+import { LeaseCardComponent } from './components/lease-list/lease-card/lease-card.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+
 
 @NgModule({
   declarations: [
@@ -21,7 +27,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     ScanPartComponent,
     HeaderComponent,
     SidebarComponent,
-    CameraComponent
+    CameraComponent,
+    NewLeaseComponent,
+    LeaseListComponent,
+    LeaseCardComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +40,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    BsDatepickerModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
@@ -38,6 +48,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   ],
   providers: [
     NgbActiveModal
-  ]
+  ],
+  entryComponents: [NewLeaseComponent]
 })
 export class PartScannerModule { }

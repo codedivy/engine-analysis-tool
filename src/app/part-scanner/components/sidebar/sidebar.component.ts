@@ -1,5 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewLeaseComponent } from '../../components/new-lease/new-lease.component';
 
 @Component({
     selector: 'app-sidebar',
@@ -11,11 +13,13 @@ export class SidebarComponent implements OnInit {
     collapsed: boolean;
     showMenu: string;
     pushRightClass: string;
+    modalReference = null;
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
     constructor(
-        public router: Router ,
+        public router: Router,
+        private modalService: NgbModal,
                 ) {
     }
 
@@ -44,4 +48,12 @@ export class SidebarComponent implements OnInit {
         this.collapsedEvent.emit(this.collapsed);
     }
 
+    openVerticallyCentered() {
+        this.modalReference = this.modalService.open(NewLeaseComponent, { centered: true });
+        this.modalReference.result.then((data) => {
+            // this.resetModalData();
+        }, (reason) => {
+            // this.resetModalData();
+        });
+    }
 }

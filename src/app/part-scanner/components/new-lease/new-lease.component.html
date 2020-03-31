@@ -1,0 +1,50 @@
+<div class="modal-header">
+    <h4 class="modal-title">New Lease Form</h4>
+  </div>
+  <div class="modal-body">
+    <div class="container"> 
+    
+      <form class="newLease-object" role="form" name='form' #newLeaseForm="ngForm" (ngSubmit)='newLeaseForm.form.valid && onSubmit()' >
+      
+        <div class="row">
+          <div class="form-group col-md-12">
+              <label for="label" class='forLabel'>Engine Name</label>
+              <input type="text" class='form-control' name="engineName" #engineName="ngModel" [(ngModel)]="newLeaseDetails.engineName" class="form-control input-underline input-lg"  placeholder="{{ 'Engine Name' }}" required >
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+              <label for="label" class='forLabel'>Serial Number</label>
+              <input  class='form-control' name="serialNumber" #serialNumber="ngModel" [(ngModel)]="newLeaseDetails.serialNumber" class="form-control input-underline input-lg"  placeholder="{{ 'Serial Number' }}" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+              <label for="label" class='forLabel'>Lessee</label>
+              <input type="text" class='form-control' name="lessee" #lessee="ngModel" [(ngModel)]="newLeaseDetails.lessee" class="form-control input-underline input-lg"  placeholder="{{ 'Lessee' }}" required >
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="startDate" class="forLabel">Start Date</label>
+          <input type="text" autocomplete="off" class="form-control" name="startDate" #startDate='ngModel' [(ngModel)]="newLeaseDetails.startDate" [bsConfig]="{containerClass:'theme-dark-blue'}" bsDatepicker  placeholder="{{ 'Start Date' }}" placement='top' required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="startDate" class="forLabel">End Date</label>
+          <input type="text" autocomplete="off" class="form-control" name="endDate" #endDate='ngModel' [(ngModel)]="newLeaseDetails.endDate" [bsConfig]="{containerClass:'theme-dark-blue'}" bsDatepicker  placeholder="{{ 'Start Date' }}" placement='top' required>
+          </div>
+        </div>
+
+
+        <div class="footer-btn">
+          <button type="button" class="btn btn-outline-dark not-focusable " (click)="activeModal.close('Close click')" >Close</button>
+          <button type="submit" class="btn btn-dark" >Start Pre-Lease Inpection</button>
+        </div> 
+      </form>
+    </div>    
+  </div>

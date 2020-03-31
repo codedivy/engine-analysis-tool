@@ -1,0 +1,68 @@
+.visitor-col-header {
+  margin-bottom: 20px;
+
+
+  .mat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0px 10px -1px rgba(0,0,0,.2), 0 1px 3px 0 rgba(21, 15, 15, 0.14), 0 1px 3px 0 rgba(0,0,0,.12);
+
+    > span {
+      display: flex;
+      align-items: center;
+
+      img {
+        margin-right: 8px;
+      }
+    }
+
+    .left-icon {
+      height: 20px;
+    }
+
+  }
+
+
+}
+
+.lease-container {
+  .engine-card {
+    margin-bottom: 1rem;
+    box-shadow: 0 0px 10px -1px rgba(0,0,0,.2), 0 1px 3px 0 rgba(21, 15, 15, 0.14), 0 1px 3px 0 rgba(0,0,0,.12);
+
+    .mat-card-header {
+      margin-bottom: 10px;
+
+      img.mat-card-avatar {
+        height: 150px;
+        width: 100%;
+        border-radius: 4px;
+      }
+
+      .mat-card-title {
+        font-size: 16px;
+      }
+
+      .mat-card-subtitle.start-date {
+        margin-bottom: 8px;
+      }
+
+      .mat-card-subtitle.location {
+        margin-bottom: 0px;
+      }
+    }
+
+    .mat-card-content {
+      > p {
+        margin-bottom: 8px;
+
+        > span {
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+
