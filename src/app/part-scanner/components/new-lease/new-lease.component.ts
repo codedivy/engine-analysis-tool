@@ -20,8 +20,8 @@ export class NewLeaseComponent implements OnInit {
   }
 
   getCurrentTimeStampOfGivenDate() {
-    const updatedDate =  new Date().getTime('Wed Mar 11 2020 16:48:43 GMT+0530 (India Standard Time)');
-    console.log(updatedDate);
+    // const updatedDate =  new Date().getTime('Wed Mar 11 2020 16:48:43 GMT+0530 (India Standard Time)');
+    // console.log(updatedDate);
   }
 
 }

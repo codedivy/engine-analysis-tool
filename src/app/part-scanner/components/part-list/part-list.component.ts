@@ -45,7 +45,7 @@ export class PartListComponent implements OnInit {
     this.dataSource = new MatTableDataSource(dummyData);
   }
 
-  searchEmployee(filterValue: String) {
+  searchEmployee(filterValue) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

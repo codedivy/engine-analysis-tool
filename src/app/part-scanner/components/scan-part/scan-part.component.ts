@@ -2,8 +2,9 @@ import {Component, OnInit, OnChanges, ViewChild, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {WebcamImage} from 'ngx-webcam';
 import {CameraComponent} from '../camera/camera.component';
-import { FormGroup, FormControl } from '@angular/forms';
-import {ApiService} from "../../services/api.service";
+import {ApiService} from '../../services/api.service';
+import { Router } from '@angular/router';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-scan-part',
@@ -12,10 +13,37 @@ import {ApiService} from "../../services/api.service";
 })
 export class ScanPartComponent implements OnInit {
 
+  // tslint:disable-next-line:max-line-length
+  displayedColumns: string[] = ['position', 'partName', 'gridLocation', 'totalCount', 'serialNumber', 'photo', 'expectedStatus', 'Detectedstatus'];
+  dataSource: any;
+
   @ViewChild('camera', {static: false}) camera: CameraComponent;
+
+  @ViewChild(MatSort, {static: false}) set matSort(sort: MatSort) {
+    this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
+      if (typeof data[sortHeaderId] === 'string') {
+        return data[sortHeaderId].toLocaleLowerCase();
+      }
+      return data[sortHeaderId];
+    };
+    this.dataSource.sort = sort;
+  }
+
+  @ViewChild(MatPaginator, {static: false}) set paginator(sort: MatPaginator) {
+    this.dataSource.paginator = sort;
+  }
+
+  cssClassForStatus = {
+    P: 'pending',
+    M: 'missing',
+    D: 'done'
+  };
+
   public selectedOutlineImage;
   public outlineImageList;
   public webcamImage;
+  public showPartListTable;
+  public savedSections: any = [];
   selected = 'option2';
 
   showCameraView: boolean;
@@ -30,15 +58,20 @@ export class ScanPartComponent implements OnInit {
     });
   }
 
-  constructor(@Inject(DOCUMENT) private document: any, private apiService: ApiService) {
+  constructor(
+    @Inject(DOCUMENT) private document: any,
+    private apiService: ApiService,
+    public router: Router) {
   }
 
   ngOnInit() {
     this.showCameraView = false;
+    this.showPartListTable = false;
     this.outlineImageList = [
-      {image: 'Engine outline 1', src: '../../assets/images/engines-outlines/utc-engine-outline.png'},
-      {image: 'Some Other', src: 'https://via.placeholder.com/300.png/09f/fff'}
+      {id: 1,  image: 'Engine outline 1', src: '../../assets/images/engines-outlines/utc-engine-outline.png'},
+      {id: 2,  image: 'Some Other', src: 'https://via.placeholder.com/300.png/09f/fff'}
     ];
+    this.dataSource = new MatTableDataSource([]);
   }
 
   private convertSrcToBlob(url) {
@@ -62,9 +95,39 @@ export class ScanPartComponent implements OnInit {
         .subscribe(
             response => {
                 console.log(response);
+                if ( response.success ) {
+                  if ( this.savedSections.indexOf(this.selectedOutlineImage.id) === -1 ) {
+                    this.savedSections.push(this.selectedOutlineImage.id);  
+                  }
+                  console.log('saved section', this.savedSections)
+                }
             }
         );
     }
+  }
+
+  generatePartList() {
+    console.log('generate partlist')
+    const dummyData = [
+      {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'D', Detectedstatus: 'M'},
+      {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'P', Detectedstatus: 'P'},
+      {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'M', Detectedstatus: 'M'},
+      {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'D', Detectedstatus: 'P'},
+      ];
+
+    this.dataSource = new MatTableDataSource(dummyData);
+    // this.showPartListTable = true;
+
+  }
+  generateFinalReport() {
+    this.router.navigateByUrl('/part-list');
+  }
+
+  resetCapturedImage() {
+    this.webcamImage = null;
+    this.dataSource = new MatTableDataSource([]);
+
+    console.log('reset', this.selectedOutlineImage )
   }
 
   onClick() {
