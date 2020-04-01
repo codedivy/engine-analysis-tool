@@ -57,7 +57,7 @@
 
     <app-post-lease-table *ngIf="!leaseDetails.isPre && webcamImage && webcamImage.original.imageAsDataUrl && selectedSectionPartList.length"
                          [tableHeading]="'Section Details'"
-                         [data]="selectedSectionPartList"></app-post-lease-table>
+                         [data]="selectedSectionPartListForPost"></app-post-lease-table>
 
     <div class="final-report col-lg-2 col-md-4 col-sm-12 col-xs-12"  *ngIf='savedSections.length == outlineImageList.length'>
       <button type="button" class="btn btn-dark" (click)="generateFinalReport(leaseDetails.leaseId)">Generate Final Report</button>

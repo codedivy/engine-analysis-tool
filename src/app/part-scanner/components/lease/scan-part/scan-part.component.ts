@@ -20,6 +20,8 @@ export class ScanPartComponent implements OnInit {
   public webcamImage;
   public savedSections: any = [];
   public selectedSectionPartList: any = [];
+
+  public selectedSectionPartListForPost: any = []; // THis variable will not be needed after server integration
   public leaseDetails: object = {
     leaseId: null,
     basicDetails: {},
@@ -34,7 +36,6 @@ export class ScanPartComponent implements OnInit {
     private apiService: ApiService,
     private leaseService: LeaseService,
     public router: Router) {
-    console.log(this.leaseDetails);
   }
 
   ngOnInit() {
@@ -89,14 +90,23 @@ export class ScanPartComponent implements OnInit {
   }
 
   generatePartList() {
-    console.log('generate partlist')
+    console.log('generate partlist');
+
     const dummyData = [
       {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'D', Detectedstatus: 'M'},
       {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'P', Detectedstatus: 'P'},
       {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'M', Detectedstatus: 'M'},
       {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'D', Detectedstatus: 'P'},
       ];
+
+    const dummyDataForPostLease = [
+      {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', preLeaseStatus: 'D', postLeaseStatus: 'M'},
+      {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', preLeaseStatus: 'P', postLeaseStatus: 'P'},
+      {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', preLeaseStatus: 'M', postLeaseStatus: 'M'},
+      {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', preLeaseStatus: 'D', postLeaseStatus: 'P'},
+      ];
     this.selectedSectionPartList = dummyData;
+    this.selectedSectionPartListForPost = dummyDataForPostLease; // THis variable will not be needed after server integration
     // this.showPartListTable = true;
 
   }
