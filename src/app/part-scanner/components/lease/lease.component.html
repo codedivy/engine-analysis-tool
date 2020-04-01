@@ -1,1 +1,11 @@
-<p>lease works!</p>
+<div class="lease-container">
+
+  <app-pre-lease *ngIf="leaseDetails.isPre">
+
+  </app-pre-lease>
+
+  <app-post-lease *ngIf="!leaseDetails.isPre">
+
+  </app-post-lease>
+
+</div>

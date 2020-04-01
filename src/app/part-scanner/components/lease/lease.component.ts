@@ -8,6 +8,8 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class LeaseComponent implements OnInit {
 
+  public leaseDetails: object;
+
   constructor(private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -16,8 +18,21 @@ export class LeaseComponent implements OnInit {
 
   getLeaseDetails() {
     this.activeRoute.params.subscribe(params => {
-      if(params['id']) {
+      if(params['leaseId']) {
         console.log("Making a server call and fetching the lease details");
+
+        this.leaseDetails = {
+          leaseId: params['leaseId'],
+          isPre: true,
+          basicDetails: {
+            engineName: "V2500",
+            leasee: "Indigo",
+            startDate: "12 Jan 2020",
+            endDate: "15 Apr 2020",
+            serialNumber: "AE-1223214"
+          },
+          sectionDetails: []
+        }
       }
     })
 
