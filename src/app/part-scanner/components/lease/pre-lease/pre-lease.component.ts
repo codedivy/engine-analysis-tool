@@ -18,7 +18,6 @@ export class PreLeaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ng on itit")
     this.getAllSectionsPartList();
 
   }
@@ -45,9 +44,7 @@ export class PreLeaseComponent implements OnInit {
   }
 
   startPostLeaseInspection(leaseId) {
-    this.leaseService.changeLease({...this.leaseDetails, isPre: false})
-    // this.leaseService.currentLease$.subscribe(lease => console.log(lease));
-
+    this.leaseService.changeLease({...this.leaseDetails, isPre: false});
     this.router.navigateByUrl("lease-list/" + leaseId + "/scan-part");
   }
 

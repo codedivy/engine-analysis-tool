@@ -22,7 +22,15 @@
     <hr/>
 
     <div class="section-details">
+      <div class="all-section-container">
 
+        <div class="section-details" *ngFor="let section of allSectionsPartList">
+          <app-pre-lease-table
+            [tableHeading]="section.sectionName"
+            [data]="section.partList"></app-pre-lease-table>
+        </div>
+
+      </div>
     </div>
 
   </div>

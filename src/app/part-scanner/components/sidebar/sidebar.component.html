@@ -1,23 +1,18 @@
 <nav class="sidebar" id="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+
   <div class="list-group">
-      <a [routerLink]="['/lease-list']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-          <i class="fa fa-fw fa-file"></i>&nbsp;
-          <span>{{ 'Lease List' }}</span>
-      </a>
-      <a role="button" class="list-group-item" (click)="openVerticallyCentered()">
-            <i class="fa fa-fw  fa-registered"></i>&nbsp;
-            <span>{{ 'New Lease' }}</span>
-      </a>
-      <a [routerLink]="['/scan-part']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-          <i class="fa fa-fw fa fa-camera"></i>&nbsp;
-          <span>{{ 'Scan Part' }}</span>
-      </a>
-      <a [routerLink]="['/part-list']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-          <i class="fa fa-fw fa-file"></i>&nbsp;
-          <span>{{ 'Part List' }}</span>
-      </a>
-      <hr >        
-      
+
+    <a [routerLink]="['/lease-list']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-fw fa-file"></i>&nbsp;
+      <span>{{ 'Lease List' }}</span>
+    </a>
+
+    <a role="button" class="list-group-item" (click)="openVerticallyCentered()">
+      <i class="fa fa-fw  fa-plus-circle"></i>&nbsp;
+      <span>{{ 'New Lease' }}</span>
+    </a>
+    <hr>
+
   </div>
 
 </nav>
