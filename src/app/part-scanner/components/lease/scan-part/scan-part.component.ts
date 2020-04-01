@@ -18,9 +18,13 @@ export class ScanPartComponent implements OnInit {
   public selectedOutlineImage;
   public outlineImageList;
   public webcamImage;
-  public showPartListTable;
   public savedSections: any = [];
-  public leaseDetails: object = {};
+  public selectedSectionPartList: any = [];
+  public leaseDetails: object = {
+    leaseId: null,
+    basicDetails: {},
+    isPre: null
+  };
 
   showCameraView: boolean;
   fullScreenView: boolean;
@@ -30,17 +34,19 @@ export class ScanPartComponent implements OnInit {
     private apiService: ApiService,
     private leaseService: LeaseService,
     public router: Router) {
+    console.log(this.leaseDetails);
   }
 
   ngOnInit() {
     this.showCameraView = false;
-    this.showPartListTable = false;
     this.outlineImageList = [
       {id: 1,  image: 'Engine outline 1', src: '../../assets/images/engines-outlines/utc-engine-outline.png'},
       {id: 2,  image: 'Some Other', src: 'https://via.placeholder.com/300.png/09f/fff'}
     ];
 
-    this.leaseService.loadLeaseDdetails().subscribe(leaseDetails => this.leaseDetails = leaseDetails);
+    this.leaseService.currentLease$.subscribe(lease => this.leaseDetails = lease);
+    // setTimeout(() => this.)
+
   }
 
   async handleImage(webcamImage: WebcamImage) {
@@ -65,18 +71,21 @@ export class ScanPartComponent implements OnInit {
 
     formData.forEach((value, key) => console.log(key, ': ', value));
 
-    this.apiService.uploadImage(formData)
-      .subscribe(
-        response => {
-          console.log(response);
-          if ( response.success ) {
-            if ( this.savedSections.indexOf(this.selectedOutlineImage.id) === -1 ) {
-              this.savedSections.push(this.selectedOutlineImage.id);
-            }
-            console.log('saved section', this.savedSections)
-          }
-        }
-      );
+    // this.apiService.uploadImage(formData)
+    //   .subscribe(
+    //     response => {
+    //       console.log(response);
+    //       if ( response.success ) {
+    //         if ( this.savedSections.indexOf(this.selectedOutlineImage.id) === -1 ) {
+    //           this.savedSections.push(this.selectedOutlineImage.id);
+    //           this.generatePartList();
+    //         }
+    //         console.log('saved section', this.savedSections)
+    //       }
+    //     }
+    //   );
+    this.savedSections.push(this.selectedOutlineImage.id);
+    this.generatePartList();
   }
 
   generatePartList() {
@@ -87,11 +96,12 @@ export class ScanPartComponent implements OnInit {
       {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'M', Detectedstatus: 'M'},
       {position: 1, partName: 'ABC', gridLocation: '3*2', totalCount: '2', serialNumber: 'ABC123', photo: 'https://www.asdreports.com/media/PR_5389.jpg', expectedStatus: 'D', Detectedstatus: 'P'},
       ];
+    this.selectedSectionPartList = dummyData;
     // this.showPartListTable = true;
 
   }
-  generateFinalReport() {
-    this.router.navigateByUrl('/part-list');
+  generateFinalReport(leaseId) {
+    this.router.navigateByUrl('lease-list/' + leaseId);
   }
 
   resetCapturedImage() {

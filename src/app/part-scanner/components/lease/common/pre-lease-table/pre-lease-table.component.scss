@@ -1,6 +1,13 @@
 .pre-lease-table-container {
 
   .part-list-table {
+
+    .table-heading {
+      margin-bottom: 10px;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
     .mat-cell-img > img {
       width: 80px;
       height: 80px;

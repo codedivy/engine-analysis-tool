@@ -1,6 +1,9 @@
 <div class="pre-lease-table-container">
 
   <div class="part-list-table" *ngIf='dataSource.data.length'>
+    <div class="table-heading">
+      {{tableHeading}}
+    </div>
     <mat-table [dataSource]='dataSource' matSort class='mat-elevation-z8' matSortActive="name" matSortDirection="asc"
                matSortDisableClear>
 
@@ -54,6 +57,10 @@
     </mat-table>
 
     <mat-paginator [pageSizeOptions]="[5 , 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <div *ngIf="!dataSource.data.length">
+    No data found.
   </div>
 
 </div>

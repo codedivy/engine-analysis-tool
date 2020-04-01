@@ -7,8 +7,6 @@ import {RestClient} from "../common/rest.client";
 })
 export class LeaseService {
 
-  public cameraSource = {};
-
   private selectedLeaseSource = new BehaviorSubject(null);
   public currentLease$ = this.selectedLeaseSource.asObservable();
 
@@ -21,6 +19,7 @@ export class LeaseService {
 
 
   public loadLeaseDdetails(): Observable<any> {
+    console.log("Inside service")
     return Observable.create((observer: Observer<any>) => {
       const response = {
         leaseId: 1,
@@ -34,6 +33,7 @@ export class LeaseService {
         },
         sectionDetails: []
       };
+      this.changeLease(response);
       observer.next(response);
       observer.complete();
       // this.http.get(config.LIST_OF_SOURCES_URL, {}).subscribe(response => {

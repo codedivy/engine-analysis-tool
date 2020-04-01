@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
 
 @Component({
@@ -6,7 +6,10 @@ import {MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
   templateUrl: './pre-lease-table.component.html',
   styleUrls: ['./pre-lease-table.component.scss']
 })
-export class PreLeaseTableComponent implements OnInit {
+export class PreLeaseTableComponent implements OnInit, OnChanges {
+
+  @Input() data: any = [];
+  @Input() tableHeading;
 
   @ViewChild(MatSort, {static: false}) set matSort(sort: MatSort) {
     this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
@@ -31,11 +34,16 @@ export class PreLeaseTableComponent implements OnInit {
   public displayedColumns: string[] = ['position', 'partName', 'gridLocation', 'totalCount', 'serialNumber', 'photo', 'expectedStatus', 'Detectedstatus'];
   public dataSource: any;
 
-
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
     this.dataSource = new MatTableDataSource([]);
   }
+
+  ngOnInit() {
+  }
+
+  ngOnChanges() {
+    this.dataSource.data = this.data;
+  }
+
 
 }

@@ -16,14 +16,20 @@
       </div>
 
       <div class="col-3">
-        <button>Start Post Lease Inspection</button>
+        <button class="btn btn-outline btn-outline-primary" (click)="startPostLeaseInspection(leaseDetails.leaseId)">Start Post Lease Inspection</button>
       </div>
 
     </div>
 
     <hr/>
 
-    <div class="section-details">
+    <div class="all-section-container">
+
+      <div class="section-details" *ngFor="let section of allSectionsPartList">
+        <app-pre-lease-table
+          [tableHeading]="section.sectionName"
+          [data]="section.partList"></app-pre-lease-table>
+      </div>
 
     </div>
 
