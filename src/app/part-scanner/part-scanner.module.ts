@@ -20,6 +20,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { LeaseComponent } from './components/lease/lease.component';
 import { PreLeaseComponent } from './components/lease/pre-lease/pre-lease.component';
 import { PostLeaseComponent } from './components/lease/post-lease/post-lease.component';
+import { BasicDetailsComponent } from './components/lease/common/basic-details/basic-details.component';
 
 
 
@@ -37,6 +38,7 @@ import { PostLeaseComponent } from './components/lease/post-lease/post-lease.com
     LeaseComponent,
     PreLeaseComponent,
     PostLeaseComponent,
+    BasicDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-post-lease',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-lease.component.scss']
 })
 export class PostLeaseComponent implements OnInit {
+
+  @Input() leaseDetails = {};
 
   constructor() { }
 

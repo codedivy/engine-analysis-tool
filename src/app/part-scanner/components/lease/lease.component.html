@@ -1,10 +1,10 @@
 <div class="lease-container">
 
-  <app-pre-lease *ngIf="leaseDetails.isPre">
+  <app-pre-lease *ngIf="leaseDetails.isPre" [leaseDetails]="leaseDetails">
 
   </app-pre-lease>
 
-  <app-post-lease *ngIf="!leaseDetails.isPre">
+  <app-post-lease *ngIf="!leaseDetails.isPre" [leaseDetails]="leaseDetails">
 
   </app-post-lease>
 

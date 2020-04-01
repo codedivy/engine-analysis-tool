@@ -21,7 +21,7 @@ body {
     // background-color: #f8f9fa;
     background-color: #fff;
 
-    
+
     font-family: heebo, roboto;
     .cdk-overlay-container {
         z-index: 1050;
@@ -32,7 +32,7 @@ body {
     }
     .no-permission {
         // pointer-events: all !important;
-        
+
         cursor: none;
         // &::after {
         //     content: "No permission";
@@ -47,5 +47,11 @@ body {
     }
     .no-permission::active {
         pointer-events: none;
+    }
+
+    .header {
+      .h1 {
+        font-size: 24px;
+      }
     }
 }

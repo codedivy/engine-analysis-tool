@@ -23,7 +23,7 @@ export class LeaseComponent implements OnInit {
 
         this.leaseDetails = {
           leaseId: params['leaseId'],
-          isPre: true,
+          isPre: false,
           basicDetails: {
             engineName: "V2500",
             leasee: "Indigo",
