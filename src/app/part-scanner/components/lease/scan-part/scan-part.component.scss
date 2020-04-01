@@ -160,36 +160,11 @@
 
   }
 
-  .part-list-table{
-    .mat-cell-img > img {
-      width: 80px;
-      height: 80px;
-      padding: 5px 5px 5px 0;
-    }
-  
-    .square {
-      border-radius: 50%;
-      margin-left: 10px;
-  
-      &.done {
-        border: 6px solid green;
-      }
-  
-      &.pending {
-        border: 6px solid #ffb915;
-      }
-  
-      &.missing {
-        border: 6px solid #ff0e0b;
-      }
-    }
-  }
-
   .final-report {
     margin: auto;
   }
 
-  
+
 }
 
 

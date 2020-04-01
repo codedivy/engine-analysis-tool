@@ -1,0 +1,59 @@
+<div class="scan-part-container">
+  <div class='header'>
+    <div>
+      <h1 class="h1">{{leaseDetails.isPre ? "Pre" : "Post"}} Lease Engine Analysis ({{leaseDetails.basicDetails.engineName}})</h1>
+    </div>
+  </div>
+  <hr />
+
+  <div class="floating-container {{showCameraView ? ' camera-opened' : ''}}">
+    <div class="actions">
+      <div class="search" *ngIf="showCameraView">
+        <mat-form-field>
+          <mat-label>Select Outline</mat-label>
+          <mat-select [(value)]="selectedOutlineImage" (selectionChange)="resetCapturedImage()" name="outlineImg">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let outlineImage of outlineImageList" [value]="outlineImage">
+              {{outlineImage.image}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <button name="toggle FullScreen" class="btn btn-default toggle-fullscreen" (click)='toggleFullScreen()' type="button">
+        <img [src]="!fullScreenView ? '../../assets/images/fullscreen-enter.svg' : '../../assets/images/fullscreen-exit.svg'">
+      </button>
+
+      <button  [disabled]="!selectedOutlineImage"   type="button" class="btn btn-default trigger-snapshot not-focusable" (click)="triggerSnapshot();" *ngIf="showCameraView">
+        {{ !webcamImage? ' Capture Image': 'Retake Image'}}
+        <img src="../../assets/images/click-photo.svg">
+      </button>
+
+      <button type="button" class="btn btn-default toggle-camera not-focusable" (click)='toggleCamera()' >
+        {{showCameraView ? 'Close' : 'Open'}} Camera
+        <img src="../../assets/images/cross.svg">
+      </button>
+
+    </div>
+
+    <app-camera *ngIf='showCameraView' #camera [imageSrc]='selectedOutlineImage && selectedOutlineImage.src || null ' [captureImageEvent]="" (pictureTaken)="handleImage($event)"></app-camera>
+  </div>
+
+  <form class="register-object">
+    <div class="snapshot" *ngIf="webcamImage">
+      <img class="col-lg-2 col-md-4 col-sm-12 col-xs-12" [src]="webcamImage.original.imageAsDataUrl" />
+      <div class="btn-style col-lg-2 col-md-4 col-sm-12 col-xs-12">
+          <button type="button" *ngIf="webcamImage && webcamImage.original.imageAsDataUrl" class="btn btn-dark" (click)="onUpload()">Upload</button>
+
+          <button type="button" *ngIf="webcamImage && webcamImage.original.imageAsDataUrl" class="btn btn-dark" (click)="generatePartList()">Generate Part List</button>
+      </div>
+    </div>
+
+
+  </form>
+
+  <div class="final-report col-lg-2 col-md-4 col-sm-12 col-xs-12"  *ngIf='savedSections.length == outlineImageList.length'>
+      <button type="button" class="btn btn-dark" (click)="generateFinalReport()">Generate Final Report</button>
+  </div>
+
+</div>

@@ -30,17 +30,17 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log('click submit');
-    this.apiService.login(this.loginDetails).subscribe((loginRes) => {
-
-        if ( loginRes.success ) {
-            console.log(loginRes);
-            this.auth.logIn(loginRes);
-        } else {
-            alert('login credential not found');
-        }
-    });
-    // const loginRes = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYXdpX2NsaWVudF9pZCI6MiwiYXdpcm9zIjoiZGVtb0Bhd2lyb3MuY29tIiwibGV2ZWwiOiJhd2lfdXNlciIsImlhdCI6MTU4MzEyNzQzMSwiZXhwIjoxNTgzMjEzODMxfQ.lSjk7-kvM4tqd0uKmB-paMRErtOzhGL2mqvRRoE6sFU';
-    // this.auth.logIn(loginRes);
+    // this.apiService.login(this.loginDetails).subscribe((loginRes) => {
+    //
+    //     if ( loginRes.success ) {
+    //         console.log(loginRes);
+    //         this.auth.logIn(loginRes);
+    //     } else {
+    //         alert('login credential not found');
+    //     }
+    // });
+    const loginRes = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiYXdpX2NsaWVudF9pZCI6MiwiYXdpcm9zIjoiZGVtb0Bhd2lyb3MuY29tIiwibGV2ZWwiOiJhd2lfdXNlciIsImlhdCI6MTU4MzEyNzQzMSwiZXhwIjoxNTgzMjEzODMxfQ.lSjk7-kvM4tqd0uKmB-paMRErtOzhGL2mqvRRoE6sFU';
+    this.auth.logIn(loginRes);
   }
 
 }

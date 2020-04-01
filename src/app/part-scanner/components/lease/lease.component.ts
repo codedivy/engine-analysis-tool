@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {LeaseService} from "../../services/lease.service";
 
 @Component({
   selector: 'app-lease',
@@ -10,7 +11,7 @@ export class LeaseComponent implements OnInit {
 
   public leaseDetails: object;
 
-  constructor(private activeRoute: ActivatedRoute) { }
+  constructor(private activeRoute: ActivatedRoute, private leaseService: LeaseService) { }
 
   ngOnInit() {
     this.getLeaseDetails();
@@ -21,18 +22,7 @@ export class LeaseComponent implements OnInit {
       if(params['leaseId']) {
         console.log("Making a server call and fetching the lease details");
 
-        this.leaseDetails = {
-          leaseId: params['leaseId'],
-          isPre: false,
-          basicDetails: {
-            engineName: "V2500",
-            leasee: "Indigo",
-            startDate: "12 Jan 2020",
-            endDate: "15 Apr 2020",
-            serialNumber: "AE-1223214"
-          },
-          sectionDetails: []
-        }
+        this.leaseService.loadLeaseDdetails().subscribe(leaseDetails => this.leaseDetails = leaseDetails);
       }
     })
 

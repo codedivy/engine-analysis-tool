@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-lease',
@@ -8,15 +9,19 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewLeaseComponent implements OnInit {
 
-  newLeaseDetails: any = {};
+  public newLeaseDetails: any = {};
+
   constructor(
     public activeModal: NgbActiveModal,
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
   onSubmit() {
     console.log('new lease details', this.newLeaseDetails);
+    this.router.navigateByUrl("/lease-list/1/scan-part");
+    this.activeModal.close();
   }
 
   getCurrentTimeStampOfGivenDate() {

@@ -5,7 +5,7 @@ import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PartScannerRoutingModule } from './part-scanner-routing.module';
 import { PartScannerComponent } from './part-scanner.component';
 import { PartListComponent } from './components/part-list/part-list.component';
-import { ScanPartComponent } from './components/scan-part/scan-part.component';
+import { ScanPartComponent } from './components/lease/scan-part/scan-part.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CameraComponent } from './components/camera/camera.component';
@@ -21,6 +21,8 @@ import { LeaseComponent } from './components/lease/lease.component';
 import { PreLeaseComponent } from './components/lease/pre-lease/pre-lease.component';
 import { PostLeaseComponent } from './components/lease/post-lease/post-lease.component';
 import { BasicDetailsComponent } from './components/lease/common/basic-details/basic-details.component';
+import { PreLeaseTableComponent } from './components/lease/common/pre-lease-table/pre-lease-table.component';
+import { PostLeaseTableComponent } from './components/lease/common/post-lease-table/post-lease-table.component';
 
 
 
@@ -39,6 +41,8 @@ import { BasicDetailsComponent } from './components/lease/common/basic-details/b
     PreLeaseComponent,
     PostLeaseComponent,
     BasicDetailsComponent,
+    PreLeaseTableComponent,
+    PostLeaseTableComponent,
   ],
   imports: [
     CommonModule,
