@@ -1,1 +1,66 @@
-<p>post-lease-table works!</p>
+<div class="post-lease-table-container">
+
+  <div class="part-list-table" *ngIf='dataSource.data.length'>
+    <div class="table-heading">
+      {{tableHeading}}
+    </div>
+    <mat-table [dataSource]='dataSource' matSort class='mat-elevation-z8' matSortActive="name" matSortDirection="asc"
+               matSortDisableClear>
+
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="partName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Part Name</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.partName}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="gridLocation">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Grid Location</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.gridLocation}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="totalCount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Total Count</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.totalCount}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="serialNumber">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Serial Number</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.serialNumber}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="photo">
+        <mat-header-cell class="mat-header-img" *matHeaderCellDef> Photo </mat-header-cell>
+        <mat-cell class="mat-cell-img" *matCellDef="let element"><img [src]="element.photo" onerror="src='assetsimages/error_404.png';"/>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="preLeaseStatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Pre Lease Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="square {{cssClassForStatus[element.preLeaseStatus]}}"></div>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="postLeaseStatus">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Post Lease Status</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="square {{cssClassForStatus[element.postLeaseStatus]}}"></div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5 , 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <div *ngIf="!dataSource.data.length">
+    No data found.
+  </div>
+
+</div>
