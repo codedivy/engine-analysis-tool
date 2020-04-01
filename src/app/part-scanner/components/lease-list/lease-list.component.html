@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div *ngFor='let lease of leases' class="col col-3">
+    <div *ngFor='let lease of leases' class="col col-3" (click)="goToLeaseDetailsPage(lease)">
         <app-lease-card></app-lease-card>
     </div>
 

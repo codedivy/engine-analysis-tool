@@ -17,6 +17,7 @@ import { NewLeaseComponent } from './components/new-lease/new-lease.component';
 import { LeaseListComponent } from './components/lease-list/lease-list.component';
 import { LeaseCardComponent } from './components/lease-list/lease-card/lease-card.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { LeaseComponent } from './components/lease/lease.component';
 
 
 
@@ -31,6 +32,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     NewLeaseComponent,
     LeaseListComponent,
     LeaseCardComponent,
+    LeaseComponent,
   ],
   imports: [
     CommonModule,
